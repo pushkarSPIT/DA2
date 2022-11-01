@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Task schemaVersion="5.4">
+    <Registration>
+        <Name>t Tests</Name>
+        <Description>The t Test task performs t test of means for one sample, two samples, and paired samples.</Description>
+        <GUID>c74c3fed-4a56-4399-8732-186cea3b772d</GUID>
+        <Procedures>TTEST UNIVARIATE</Procedures>
+        <Version>3.8</Version>
+        <Links>
+            <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://documentation.sas.com/?softwareId=ANMVA&amp;softwareVersion=3.8_15.1&amp;softwareContextId=proc_ttest&amp;requestor=inapp">The TTEST Procedure</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://documentation.sas.com/?softwareId=MVADOC&amp;softwareVersion=3.8_9.4&amp;softwareContextId=proc_univariate&amp;requestor=inapp">The UNIVARIATE Procedure</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>
+        </Links>
+    </Registration>
+    <Metadata>
+        <DataSources>
+            <DataSource name="dataset" where="true">
+                <Roles>
+                    <Role exclude="classVariable" maxVars="1"
+                        minVars="1" name="analysisVariable" type="N">Analysis variable:</Role>
+                    <Role exclude="group2Variable" maxVars="1"
+                        minVars="1" name="group1Variable" type="N">Group 1 variable:</Role>
+                    <Role exclude="group1Variable" maxVars="1"
+                        minVars="1" name="group2Variable" type="N">Group 2 variable:</Role>
+                    <Role exclude="analysisVariable" maxVars="1"
+                        minVars="1" name="classVariable" type="A">Groups variable:</Role>
+                </Roles>
+            </DataSource>
+        </DataSources>
+        <Options>
+            <Option inputType="string" name="dataTab">DATA</Option>
+            <Option inputType="string" name="optionsTab">OPTIONS</Option>
+            <Option inputType="string" name="dataGroup">DATA</Option>
+            <Option inputType="string" name="rolesGroup">ROLES</Option>
+            <Option inputType="string" name="testGroup">TESTS</Option>
+            <Option defaultValue="oneSample" inputType="combobox" name="ttestType">t test:</Option>
+            <Option inputType="string" name="oneSample">One-sample test</Option>
+            <Option inputType="string" name="pairedSample">Paired test</Option>
+            <Option inputType="string" name="twoSample">Two-sample test</Option>
+            <Option defaultValue="sidesTwo" inputType="combobox" name="sides">Tails:</Option>
+            <Option inputType="string" name="sidesTwo">Two-tailed test</Option>
+            <Option inputType="string" name="sidesUpper">Upper one-tailed test</Option>
+            <Option inputType="string" name="sidesLower">Lower one-tailed test</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis mean for a two-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis mean for a two-tailed test."
+                name="nullMean2"
+                promptMessage="Enter a number for the null hypothesis mean for a two-tailed test."
+                rangeMessage="Enter a number for the null hypothesis mean for a two-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu ^=</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis mean for an upper one-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis mean for an upper one-tailed test."
+                name="nullMeanU"
+                promptMessage="Enter a number for the null hypothesis mean for an upper one-tailed test."
+                rangeMessage="Enter a number for the null hypothesis mean for an upper one-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu &gt;</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis mean for lower one-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis mean for lower one-tailed test."
+                name="nullMeanL"
+                promptMessage="Enter a number for the null hypothesis mean for lower one-tailed test."
+                rangeMessage="Enter a number for the null hypothesis mean for lower one-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu &lt;</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis difference for a two-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis difference for a two-tailed test."
+                name="twoNullMean2"
+                promptMessage="Enter a number for the null hypothesis difference for a two-tailed test."
+                rangeMessage="Enter a number for the null hypothesis difference for a two-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu1 - mu2 ^=</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis difference for an upper one-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis difference for an upper one-tailed test."
+                name="twoNullMeanU"
+                promptMessage="Enter a number for the null hypothesis difference for an upper one-tailed test."
+                rangeMessage="Enter a number for the null hypothesis difference for an upper one-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu1 - mu2 &gt;</Option>
+            <Option defaultValue="0" inputType="numbertext"
+                invalidMessage="Enter a number for the null hypothesis difference for lower one-tailed test."
+                maxValue="900000000000000" minValue="-900000000000000"
+                missingMessage="Enter a number for the null hypothesis difference for lower one-tailed test."
+                name="twoNullMeanL"
+                promptMessage="Enter a number for the null hypothesis difference for lower one-tailed test."
+                rangeMessage="Enter a number for the null hypothesis difference for lower one-tailed test."
+                required="true" width="50px">Alternative hypothesis: mu1 - mu2 &lt;</Option>
+            <Option inputType="checkbox" name="cochran">Cox and Cochran probability approximation for unequal variances</Option>
+            <Option inputType="string" name="normalTestGroup">Normality Assumption</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="normalTest">Tests for normality</Option>
+            <Option inputType="string" name="plotsGroup">PLOTS</Option>
+            <Option defaultValue="defaultPlotsChoice"
+                inputType="combobox" name="plotsCombo">Plots:</Option>
+            <Option inputType="string" name="defaultPlotsChoice">Default plots</Option>
+            <Option inputType="string" name="selectedPlotsChoice">Selected plots</Option>
+            <Option inputType="string" name="suppressPlotsChoice">Suppress all plots</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="summaryPlot">Histogram and box plot</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="normalPlot">Normality plot</Option>
+            <Option indent="1" inputType="checkbox" name="intervalPlot">Confidence interval plot</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="agreementPlot">Agreement plot</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="profilePlot">Response profile plot</Option>
+            <Option indent="1" inputType="checkbox" name="wilcoxonPlot">Wilcoxon box plot</Option>
+            <Option inputType="string" name="nonparGroup">Nonparametric Tests</Option>
+            <Option indent="1" inputType="checkbox" name="nonparTests">Sign test and Wilcoxon signed rank test</Option>
+            <Option indent="1" inputType="checkbox" name="wilcoxon">Wilcoxon rank-sum test</Option>
+            <!-- Code comments -->
+            <Option inputType="string" name="commentNormality">Test for normality</Option>
+            <Option inputType="string" name="commenttTest">t test</Option>
+            <Option inputType="string" name="commentNonparametric">Nonparametric test</Option>
+            <Option inputType="string" name="commentClean">Clean up</Option>
+            <Option inputType="string" name="plotlabel">Difference:</Option>
+        </Options>
+    </Metadata>
+    <UI>
+        <Container option="dataTab">
+            <Group open="true" option="dataGroup">
+                <DataItem data="dataset"/>
+            </Group>
+            <Group open="true" option="rolesGroup">
+                <OptionChoice option="ttestType">
+                    <OptionItem option="oneSample"/>
+                    <OptionItem option="pairedSample"/>
+                    <OptionItem option="twoSample"/>
+                </OptionChoice>
+                <RoleItem role="analysisVariable"/>
+                <RoleItem role="classVariable"/>
+                <RoleItem role="group1Variable"/>
+                <RoleItem role="group2Variable"/>
+            </Group>
+        </Container>
+        <Container option="optionsTab">
+            <Group open="true" option="testGroup">
+                <OptionChoice option="sides">
+                    <OptionItem option="sidesTwo"/>
+                    <OptionItem option="sidesUpper"/>
+                    <OptionItem option="sidesLower"/>
+                </OptionChoice>
+                <OptionItem option="nullMean2"/>
+                <OptionItem option="nullMeanU"/>
+                <OptionItem option="nullMeanL"/>
+                <OptionItem option="twoNullMean2"/>
+                <OptionItem option="twoNullMeanU"/>
+                <OptionItem option="twoNullMeanL"/>
+                <OptionItem option="cochran"/>
+                <OptionItem option="normalTestGroup"/>
+                <OptionItem option="normalTest"/>
+                <OptionItem option="nonparGroup"/>
+                <OptionItem option="nonparTests"/>
+                <OptionItem option="wilcoxon"/>
+            </Group>
+            <Group open="true" option="plotsGroup">
+                <OptionChoice option="plotsCombo">
+                    <OptionItem option="defaultPlotsChoice"/>
+                    <OptionItem option="selectedPlotsChoice"/>
+                    <OptionItem option="suppressPlotsChoice"/>
+                </OptionChoice>
+                <OptionItem option="summaryPlot"/>
+                <OptionItem option="normalPlot"/>
+                <OptionItem option="agreementPlot"/>
+                <OptionItem option="profilePlot"/>
+                <OptionItem option="intervalPlot"/>
+                <OptionItem option="wilcoxonPlot"/>
+            </Group>
+        </Container>
+    </UI>
+    <Dependencies>
+        <Dependency condition="($ttestType == 'oneSample' || $ttestType == 'twoSample')">
+            <Target action="show" conditionResult="true" option="analysisVariable"/>
+            <Target action="hide" conditionResult="false" option="analysisVariable"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'pairedSample' || $ttestType == 'twoSample')">
+            <Target action="show" conditionResult="true" option="twoNullMean2"/>
+            <Target action="hide" conditionResult="false" option="twoNullMean2"/>
+            <Target action="show" conditionResult="true" option="twoNullMeanU"/>
+            <Target action="hide" conditionResult="false" option="twoNullMeanU"/>
+            <Target action="show" conditionResult="true" option="twoNullMeanL"/>
+            <Target action="hide" conditionResult="false" option="twoNullMeanL"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'oneSample')">
+            <Target action="show" conditionResult="true" option="nullMean2"/>
+            <Target action="hide" conditionResult="false" option="nullMean2"/>
+            <Target action="show" conditionResult="true" option="nullMeanU"/>
+            <Target action="hide" conditionResult="false" option="nullMeanU"/>
+            <Target action="show" conditionResult="true" option="nullMeanL"/>
+            <Target action="hide" conditionResult="false" option="nullMeanL"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'pairedSample')">
+            <Target action="show" conditionResult="true" option="group1Variable"/>
+            <Target action="hide" conditionResult="false" option="group1Variable"/>
+            <Target action="show" conditionResult="true" option="group2Variable"/>
+            <Target action="hide" conditionResult="false" option="group2Variable"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'twoSample')">
+            <Target action="show" conditionResult="true" option="classVariable"/>
+            <Target action="hide" conditionResult="false" option="classVariable"/>
+            <Target action="show" conditionResult="true" option="cochran"/>
+            <Target action="hide" conditionResult="false" option="cochran"/>
+        </Dependency>
+        <Dependency condition="($plotsCombo == 'selectedPlotsChoice')">
+            <Target action="show" conditionResult="true" option="summaryPlot"/>
+            <Target action="hide" conditionResult="false" option="summaryPlot"/>
+            <Target action="show" conditionResult="true" option="normalPlot"/>
+            <Target action="hide" conditionResult="false" option="normalPlot"/>
+            <Target action="show" conditionResult="true" option="intervalPlot"/>
+            <Target action="hide" conditionResult="false" option="intervalPlot"/>
+        </Dependency>
+        <Dependency condition="($plotsCombo == 'selectedPlotsChoice' &amp;&amp; $ttestType == 'pairedSample')">
+            <Target action="show" conditionResult="true" option="agreementPlot"/>
+            <Target action="hide" conditionResult="false" option="agreementPlot"/>
+            <Target action="show" conditionResult="true" option="profilePlot"/>
+            <Target action="hide" conditionResult="false" option="profilePlot"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'oneSample' &amp;&amp; $sides == 'sidesTwo')">
+            <Target action="show" conditionResult="true" option="nullMean2"/>
+            <Target action="hide" conditionResult="false" option="nullMean2"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'oneSample' &amp;&amp; $sides == 'sidesUpper')">
+            <Target action="show" conditionResult="true" option="nullMeanU"/>
+            <Target action="hide" conditionResult="false" option="nullMeanU"/>
+        </Dependency>
+        <Dependency condition="($ttestType == 'oneSample' &amp;&amp; $sides=='sidesLower')">
+            <Target action="show" conditionResult="true" option="nullMeanL"/>
+            <Target action="hide" conditionResult="false" option="nullMeanL"/>
+        </Dependency>
+        <Dependency condition="(!($ttestType == 'oneSample') &amp;&amp; $sides == 'sidesTwo')">
+            <Target action="show" conditionResult="true" option="twoNullMean2"/>
+            <Target action="hide" conditionResult="false" option="twoNullMean2"/>
+        </Dependency>
+        <Dependency condition="(!($ttestType == 'oneSample') &amp;&amp; $sides == 'sidesUpper')">
+            <Target action="show" conditionResult="true" option="twoNullMeanU"/>
+            <Target action="hide" conditionResult="false" option="twoNullMeanU"/>
+        </Dependency>
+        <Dependency condition="(!($ttestType == 'oneSample') &amp;&amp; $sides=='sidesLower')">
+            <Target action="show" conditionResult="true" option="twoNullMeanL"/>
+            <Target action="hide" conditionResult="false" option="twoNullMeanL"/>
+        </Dependency>
+        <Dependency condition="(($ttestType == 'oneSample' || $ttestType == 'pairedSample') &amp;&amp; $sides == 'sidesTwo')">
+            <Target action="show" conditionResult="true" option="nonparTests"/>
+            <Target action="hide" conditionResult="false" option="nonparTests"/>
+        </Dependency>
+        <Dependency condition="(($ttestType == 'twoSample') &amp;&amp; ($sides == 'sidesTwo') &amp;&amp; ($twoNullMean2 == 0))">
+            <Target action="show" conditionResult="true" option="wilcoxon"/>
+            <Target action="hide" conditionResult="false" option="wilcoxon"/>
+        </Dependency>
+        <Dependency condition="((($ttestType == 'oneSample' || $ttestType == 'pairedSample') &amp;&amp; $sides == 'sidesTwo') || (($ttestType == 'twoSample') &amp;&amp; ($sides == 'sidesTwo') &amp;&amp; ($twoNullMean2 == 0)))">
+            <Target action="show" conditionResult="true" option="nonparGroup"/>
+            <Target action="hide" conditionResult="false" option="nonparGroup"/>
+        </Dependency>
+        <Dependency condition="($plotsCombo == 'selectedPlotsChoice' &amp;&amp; (($ttestType == 'twoSample') &amp;&amp; ($sides == 'sidesTwo') &amp;&amp; ($twoNullMean2 == 0)))">
+            <Target action="show" conditionResult="true" option="wilcoxonPlot"/>
+            <Target action="hide" conditionResult="false" option="wilcoxonPlot"/>
+        </Dependency>
+    </Dependencies>
+    <CodeTemplate><![CDATA[
+ods noproctitle;
+ods graphics / imagemap=on;
+
+#if ($plotsCombo == 'selectedPlotsChoice')
+   #set($plots=0)
+   #if (($summaryPlot == 1) ||
+        ($intervalPlot == 1) ||
+        ($normalPlot == 1) ||
+        ($agreementPlot && $agreementPlot == 1) ||
+        ($profilePlot && $profilePlot == 1)
+        ) #set($plots=1)
+   #end
+#end
+
+#if ($ttestType == 'pairedSample' || $ttestType == 'twoSample')
+   #set($nullMean2=$twoNullMean2)
+   #set($nullMeanU=$twoNullMeanU)
+   #set($nullMeanL=$twoNullMeanL)
+#end
+
+#if ($sides == "sidesTwo") #set($sidesValue="2")#set($nullMean=$nullMean2)
+#elseif ($sides=="sidesUpper") #set($sidesValue="U") #set($nullMean=$nullMeanU)
+#else #set ($sidesValue="L") #set($nullMean=$nullMeanL)#end
+
+#if ($ttestType == 'pairedSample' && ($normalTest == 1 || $nonparTests == 1))
+data Work._Paired_diffs_; set $dataset;
+   _Difference_ = #foreach( $item in $group1Variable )$item#end - #foreach( $item in $group2Variable )$item#end ;
+   label _Difference_="$plotlabel #foreach( $item in $group1Variable )$item#end - #foreach( $item in $group2Variable )$item#end";
+run;
+#end
+
+#if($normalTest == 1 )
+/* $commentNormality */
+#if ($ttestType == 'oneSample')
+proc univariate data=$dataset normal mu0=$nullMean;
+   ods select TestsForNormality;
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+#if ($analysisVariable.size() > 0)
+   var $analysisVariable.get(0);
+#end
+run;
+#elseif ($ttestType == 'twoSample')
+proc univariate data=$dataset normal mu0=$nullMean;
+   ods select TestsForNormality;
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+   class #foreach( $item in $classVariable ) $item #end;
+   var #foreach( $item in $analysisVariable ) $item #end;
+run;
+#elseif ($ttestType == 'pairedSample')
+proc univariate data=Work._Paired_diffs_ normal mu0=$nullMean;
+   ods select TestsForNormality;
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+   var _Difference_;
+run;
+#end
+
+
+#end
+
+/* $commenttTest */
+proc ttest data=$dataset sides=$sidesValue h0=$nullMean
+#if ($ttestType == 'twoSample' && $cochran == 1) cochran #end
+#if ($plotsCombo == 'defaultPlotsChoice') plots(showh0)
+#elseif ($plotsCombo == 'suppressPlotsChoice') plots=none
+#else plots(only showh0)
+   #if ($plots==1) =(
+      #if ($summaryPlot == 1) summaryPlot #end
+      #if ($intervalPlot == "1") intervalPlot #end
+      #if ($normalPlot == 1) qqplot #end
+      #if ($agreementPlot && $agreementPlot == 1) agreement#end
+      #if ($profilePlot && $profilePlot == 1) profiles#end
+)
+   #end
+#end
+;
+
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+
+#if ($ttestType == 'pairedSample')
+   paired #foreach( $item in $group1Variable )$item#end*#foreach( $item in $group2Variable )$item#end;
+#else
+   #if ($ttestType == 'twoSample')
+   class #foreach( $item in $classVariable )$item#end;
+   #end
+   #if ($analysisVariable.size() > 0)
+   var $analysisVariable.get(0);
+   #end
+#end
+
+run;
+
+#if (
+   (($ttestType == 'oneSample' || $ttestType == 'pairedSample') && $nonparTests == 1) ||
+   ($ttestType == 'twoSample' && ($wilcoxon == 1 || $wilcoxonPlot == 1))
+)
+/* $commentNonparametric */
+#end
+
+#if ($ttestType == 'oneSample')
+   #if($nonparTests == 1)
+proc univariate data=$dataset mu0=$nullMean;
+   ods select TestsForLocation;
+
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+   var #foreach( $item in $analysisVariable ) $item #end;
+run;
+   #end
+#elseif ($ttestType == 'twoSample')
+   #if ($wilcoxon == 1 || $wilcoxonPlot == 1)
+proc npar1way data=$dataset wilcoxon #if($plotsCombo == 'defaultPlotsChoice' || $wilcoxonPlot == 1)plots=wilcoxonplot#else plots=none#end;
+      #if (!($wilcoxon == 1))
+   ods select WilcoxonBoxPlot;
+      #end
+
+      #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+      #end
+      
+   class #foreach( $item in $classVariable ) $item #end;
+   var #foreach( $item in $analysisVariable ) $item #end;
+run;
+   #end
+#elseif ($ttestType == 'pairedSample')
+   #if( $nonparTests == 1)
+proc univariate data=work._paired_diffs_ mu0=$nullMean;
+   ods select TestsForLocation;
+
+#if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+   var _Difference_;
+run;
+   #end
+#end
+
+#if($ttestType == 'pairedSample' && ($normalTest == 1 || $nonparTests == 1))
+/* $commentClean */
+proc delete data=work._paired_diffs_; run;
+#end
+]]></CodeTemplate>
+    <TemplateValues version="3.8"><![CDATA[
+{"nonparGroup":"Nonparametric Tests","nullMeanU":"0","summaryPlot":"1","ttestType":"oneSample","nullMeanL":"0","classVariable":"","sasOS":"Linux LIN X64 3.10.0-1062.9.1.el7.x86_64","selectedPlotsChoice":"Selected plots","normalPlot":"1","dataTab":"DATA","sidesTwo":"Two-tailed test","defaultPlotsChoice":"Default plots","group2Variable":"","nonparTests":"","rolesGroup":"ROLES","wilcoxonPlot":"","group1Variable":"","testGroup":"TESTS","twoNullMean2":"0","wilcoxon":"","oneSample":"One-sample test","sidesLower":"Lower one-tailed test","commenttTest":"t test","plotlabel":"Difference:","pairedSample":"Paired test","agreementPlot":"1","plotsCombo":"defaultPlotsChoice","nullMean2":"1000","intervalPlot":"","suppressPlotsChoice":"Suppress all plots","dataGroup":"DATA","sasVersion":"9.46","analysisVariable":"json:[{\"value\":\"Profit(Rs '000)\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"}]","commentNonparametric":"Nonparametric test","twoNullMeanL":"0","commentClean":"Clean up","twoSample":"Two-sample test","cochran":"","sides":"sidesTwo","optionsTab":"OPTIONS","commentNormality":"Test for normality","dataset":{"librarytable":"WORK.SAMPLE_DATA"},"plotsGroup":"PLOTS","normalTest":"1","sidesUpper":"Upper one-tailed test","twoNullMeanU":"0","normalTestGroup":"Normality Assumption","profilePlot":"1"}
+]]></TemplateValues>
+</Task>
